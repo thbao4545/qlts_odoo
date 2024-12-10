@@ -1,0 +1,77 @@
+<odoo>
+    <!-- Action: Danh sách tài sản -->
+    <record id="action_asset_management" model="ir.actions.act_window">
+        <field name="name">Danh sách tài sản</field>
+        <field name="res_model">qlts.asset</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+    </record>
+
+    <!-- Menu chính: Quản lý tài sản -->
+    <menuitem id="asset_management_menu" name="Quản lý tài sản" sequence="10"/>
+
+    <!-- Menu con: Tài sản -->
+    <menuitem id="asset_management_asset_menu" name="Tài sản" parent="asset_management_menu" action="action_asset_management"/>
+
+    <!-- Tree View: Danh sách tài sản -->
+    <record id="view_asset_management_tree" model="ir.ui.view">
+        <field name="name">qlts.asset.tree</field>
+        <field name="model">qlts.asset</field>
+        <field name="arch" type="xml">
+            <tree string="Danh sách tài sản">
+                <field name="image" widget="image" options="{'size': [50, 50]}"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="cate_id"/>
+                <field name="purchase_date"/>
+                <field name="value"/>
+                <field name="depreciation"/>
+                <field name="state"/>
+                <field name="buyer_id"/>
+                <field name="holder_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View: Thông tin tài sản -->
+    <record id="view_asset_management_form" model="ir.ui.view">
+        <field name="name">qlts.asset.form</field>
+        <field name="model">qlts.asset</field>
+        <field name="arch" type="xml">
+            <form string="Thông tin tài sản">
+                <sheet>
+                    <group>
+                        <field name="image" widget="image" class="oe_avatar" options="{'preview_image': 'image'}"/>
+                    </group>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="cate_id"/>
+                        <field name="purchase_date"/>
+                        <field name="value"/>
+                        <field name="depreciation"/>
+                        <field name="state"/>
+                    </group>
+                    <group>
+                        <field name="buyer_id"/> <!-- Người mua -->
+                        <field name="holder_id"/> <!-- Người nắm giữ -->
+                    </group>
+                    <group>
+                        <field name="maintenance_ids" widget="one2many_list"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action: Danh sách yêu cầu bảo trì -->
+    <record id="action_maintenance_request" model="ir.actions.act_window">
+        <field name="name">Danh sách yêu cầu bảo trì</field>
+        <field name="res_model">request.maintance</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+    </record>
+
+    <!-- Submenu: Yêu cầu bảo trì -->
+    <menuitem id="maintenance_request_menu" name="Yêu cầu bảo trì" parent="asset_management_menu" action="action_maintenance_request"/>
+</odoo>

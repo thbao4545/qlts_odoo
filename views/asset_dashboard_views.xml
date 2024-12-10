@@ -1,0 +1,61 @@
+<odoo>
+    <!-- Tạo action cho Dashboard -->
+    <record id="action_asset_dashboard" model="ir.actions.act_window">
+        <field name="name">Dashboard Tài Sản</field>
+        <field name="res_model">qlts.asset</field>
+        <field name="view_mode">kanban,graph</field>
+        <field name="target">current</field>
+    </record>
+
+    <!-- Tạo menu cho Dashboard -->
+    <menuitem id="asset_dashboard_menu" name="Dashboard" parent="asset_management_menu" action="action_asset_dashboard" sequence="5"/>
+
+    <!-- Kanban View cho Dashboard -->
+    <record id="view_asset_dashboard_kanban" model="ir.ui.view">
+        <field name="name">qlts.asset.dashboard.kanban</field>
+        <field name="model">qlts.asset</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_dashboard">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="o_kanban_card">
+                            <div class="o_kanban_card_content">
+                                <field name="name"/>
+                                <field name="cate_id"/>
+                                <field name="value" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-name="kanban-stats">
+                        <div class="o_kanban_dashboard_stats">
+                            <div>
+                                <span class="o_stat_value" t-esc="record.count"/>
+                                <span class="o_stat_text">Tổng tài sản</span>
+                            </div>
+                            <div>
+                                <span class="o_stat_value" t-esc="record.highest_value.name"/>
+                                <span class="o_stat_text">Tài sản giá trị nhất</span>
+                            </div>
+                            <div>
+                                <span class="o_stat_value" t-esc="record.lowest_value.name"/>
+                                <span class="o_stat_text">Tài sản giá trị thấp nhất</span>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Graph View cho Dashboard -->
+    <record id="view_asset_dashboard_graph" model="ir.ui.view">
+        <field name="name">qlts.asset.dashboard.graph</field>
+        <field name="model">qlts.asset</field>
+        <field name="arch" type="xml">
+            <graph string="Nhóm tài sản theo danh mục">
+                <field name="cate_id" type="row"/>
+                <field name="value" type="measure"/>
+            </graph>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_qlts_asset_user,access_qlts_asset,model_qlts_asset,,1,1,1,1
+access_request_maintance_user,access_request_maintance_user,model_request_maintance,,1,1,1,1
